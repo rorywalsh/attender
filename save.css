@@ -6,11 +6,10 @@
   image-rendering: auto;
 }
 
-#qrcode {
-  width: 160px;
-  height: 160px;
-  margin-top: 15px;
+canvas {
+  display: block;
 }
+
 
 html {
   color: #fff;
