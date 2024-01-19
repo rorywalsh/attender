@@ -16,9 +16,6 @@ async function getRoute(url){
 }
 
 async function openRoute(Page,elmnt){
-
-    
-
     tablinks = document.getElementsByClassName("tablink");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].style.backgroundColor = "";
