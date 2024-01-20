@@ -1,6 +1,6 @@
 //for generating QR codes..
 function generateQRs() {
-  document.getElementById("studentList").innerHTML = document.getElementById("students").value;
+  document.getElementById("studentQRImage").innerHTML = document.getElementById("students").value;
   var studentIds = document.getElementById("students").value.split(/\r?\n|\r|\n/g);
   var zip = new JSZip();
 
@@ -11,8 +11,8 @@ function generateQRs() {
     qr.addData(url);
     qr.make();
     let qrImg = qr.createImgTag(5, 20, "qr code");
-    document.getElementById("studentList").innerHTML = qrImg;
-    var myImg = document.getElementById("studentList").getElementsByTagName('img')[0];
+    document.getElementById("studentQRImage").innerHTML = qrImg;
+    var myImg = document.getElementById("studentQRImage").getElementsByTagName('img')[0];
 
     if (myImg && myImg.alt === "qr code") {
       // alert(myImg.src.split("base64,")[1])

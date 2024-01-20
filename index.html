@@ -12,6 +12,7 @@
     <script type="module" src="https://md-block.verou.me/md-block.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <meta name="description" content="Attendance Takers">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,78 +20,17 @@
     <link rel="icon" href="favicon.png">
     <title>Attender</title>
     <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
-<<<<<<< HEAD
     <script src="scanQRs.js"></script>
     <script src="generateQRs.js"></script>
+    <script src="manageLists.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-=======
-    <script>
-        //for scanning QR codes..
-
-        function startScanning() {
-            let attendees = [];
-            var resultContainer = document.getElementById('qr-reader-results');
-            var lastResult, countResults = 0;
-            function onScanSuccess(decodedText, decodedResult) {
-                if (decodedText !== lastResult) {
-                    ++countResults;
-                    lastResult = decodedText;
-
-                    if (attendees.indexOf(decodedText) == -1) {
-                        attendees.push(decodedText);
-                        attendees.forEach(id => {
-                            console.log(id);
-                        })
-                    }
-                    document.getElementById("attendees").value = attendees.join('\n');
-                }
-            }
-
-            var html5QrcodeScanner = new Html5QrcodeScanner(
-                "qr-reader", { fps: 10, qrbox: 250 });
-            html5QrcodeScanner.render(onScanSuccess);
-
-        }
-
-        //for generating QR codes..
-        function generateQRs() {
-            document.getElementById("studentList").innerHTML = document.getElementById("students").value;
-            var studentIds = document.getElementById("students").value.split(/\r?\n|\r|\n/g);
-            studentIds.forEach(id => {
-                console.log(id);
-                let qr = qrcode(0, 'L');
-                const url = 'http://' + id.replaceAll(/ /g, "_");;
-                qr.addData(url);
-                qr.make();
-                let qrImg = qr.createImgTag(5, 20, "qr code");
-                document.getElementById("demo").innerHTML = qrImg;
-
-                console.log(document.getElementById("demo"))
-                var myImg = document.getElementById("demo").getElementsByTagName('img')[0];
-                console.log(myImg)
-                if (myImg && myImg.alt === "qr code") {
-                    console.log(myImg.src)
-                    // Create a canvas element
-                    var a = document.createElement("a"); //Create <a>
-                    a.href = myImg.src //Image Base64 Goes here
-                    a.download = id.replaceAll(/ /g, "_") + '.png'; //File name Here
-                    a.click(); //Downloaded file
-                }
-            })
-
-
-
-
-
-        }
-
->>>>>>> b30c001c12eafb38fbd5af6031e8d9eec672fcd3
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+        integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </script>
 </head>
 
@@ -111,17 +51,29 @@
         </div>
         <div class="side-button tablink" onclick="openRoute('scanCodes',this)" id="defaultOpen"
             aria-label="open home page">
-            <span class="material-symbols-rounded">home</span>
-            <p>Scan QRs</p>
+            <span class="material-symbols-outlined">
+                qr_code_scanner
+                </span>
+                <p>Scan QRs</p>
         </div>
         <div class="side-button tablink" onclick="openRoute('generateCodes',this)" aria-label="open counter tab">
-            <span class="material-symbols-rounded ">calculate</span>
+            <span class="material-symbols-outlined">
+                add_circle
+                </span>
             <p>Create QRs</p>
         </div>
+        <div class="side-button tablink" onclick="openRoute('manageLists',this)" id="defaultOpen"
+        aria-label="open home page">
+        <span class="material-symbols-outlined">
+            manage_accounts
+            </span>
+        <p>Manage Lists</p>
+    </div>
         <div class="side-button tablink" onclick="openRoute('info',this)" aria-label="open info tab">
             <span class="material-symbols-rounded">info</span>
             <p>Info</p>
         </div>
+
     </div>
     <div id="main" class="main">
         <header>
