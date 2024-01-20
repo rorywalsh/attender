@@ -23,66 +23,11 @@
         integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
-    <script>
-        //for scanning QR codes..
-
-        function startScanning() {
-            let attendees = [];
-            var resultContainer = document.getElementById('qr-reader-results');
-            var lastResult, countResults = 0;
-            function onScanSuccess(decodedText, decodedResult) {
-                if (decodedText !== lastResult) {
-                    ++countResults;
-                    lastResult = decodedText;
-
-                    if (attendees.indexOf(decodedText) == -1) {
-                        attendees.push(decodedText);
-                        attendees.forEach(id => {
-                            console.log(id);
-                        })
-                    }
-
-                }
-            }
-
-            var html5QrcodeScanner = new Html5QrcodeScanner(
-                "qr-reader", { fps: 10, qrbox: 250 });
-            html5QrcodeScanner.render(onScanSuccess);
-
-        }
-
-        //for generating QR codes..
-        function generateQRs() {
-            document.getElementById("studentList").innerHTML = document.getElementById("students").value;
-            var studentIds = document.getElementById("students").value.split(/\r?\n|\r|\n/g);
-            studentIds.forEach(id => {
-                console.log(id);
-                let qr = qrcode(0, 'L');
-                const url = 'http://' + id.replaceAll(/ /g, "_");;
-                qr.addData(url);
-                qr.make();
-                let qrImg = qr.createImgTag(5, 20, "qr code");
-                document.getElementById("demo").innerHTML = qrImg;
-
-                console.log(document.getElementById("demo"))
-                var myImg = document.getElementById("demo").getElementsByTagName('img')[0];
-                console.log(myImg)
-                if (myImg && myImg.alt === "qr code") {
-                    console.log(myImg.src)
-                    // Create a canvas element
-                    var a = document.createElement("a"); //Create <a>
-                    a.href = myImg.src //Image Base64 Goes here
-                    a.download = id.replaceAll(/ /g, "_") + '.png'; //File name Here
-                    a.click(); //Downloaded file
-                }
-            })
-
-
-
-
-
-        }
-
+    <script src="scanQRs.js"></script>
+    <script src="generateQRs.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </script>
 </head>
 
