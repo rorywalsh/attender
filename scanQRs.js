@@ -20,18 +20,14 @@ function startScanning() {
       lastResult = decodedText;
 
       if (attendees.indexOf(decodedText) == -1) {
-        attendees.push(decodedText);
-        attendees.forEach(id => {
           students.forEach(s =>{
-            if(s === id){
-              alert("I'm in here")
+            if(s === decodedText){
+              alert(decodedText)
               let attendance = s.data.split(',');
               attendance[weekIndex] = 1;
             }
           });
-          console.log(id);
           localStorage.classes = JSON.stringify(lists);
-        })
       }
     }
   }
