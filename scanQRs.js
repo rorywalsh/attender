@@ -18,7 +18,7 @@ function startScanning() {
     if (decodedText !== lastResult) {
       ++countResults;
       lastResult = decodedText;
-
+      alert(decodedText)
       if (attendees.indexOf(decodedText) == -1) {
           students.forEach(s =>{
             if(s === decodedText){
