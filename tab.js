@@ -1,21 +1,21 @@
-async function getRoute(url){
+async function getRoute(url) {
     var markos = await fetch(url + ".html").then(function (response) {
-    
-        
+
+
         return response.text();
     }).then(function (html) {
-        
+
         return html
 
     }).catch(function (err) {
-    
+
         console.warn('Something went wrong.', err);
     });
     return markos
 
 }
 
-async function openRoute(Page,elmnt){
+async function openRoute(Page, elmnt) {
     tablinks = document.getElementsByClassName("tablink");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].style.backgroundColor = "";
@@ -31,8 +31,29 @@ async function openRoute(Page,elmnt){
     }
     var pageContent = await getRoute(Page)
     document.getElementById("view").innerHTML = pageContent
-    
 
+    function updateDropdown(id) {
+        let select = document.getElementById(id);
+        if (select) {
+            let opt1 = document.createElement('option');
+            opt1.value = 'Select';
+            opt1.innerHTML = 'Select';
+            select.appendChild(opt1);
+            if (localStorage.classes) {
+                let list = JSON.parse(localStorage.classes);
+                Object.keys(list).forEach(function (key) {
+                    // console.log('Key : ' + key + ', Value : ' + list[key].toString())
+                    let p = document.createElement('option');
+                    p.value = key;
+                    p.innerHTML = key;
+                    select.appendChild(p);
+                })
+            }
+        }
+    }
+
+    updateDropdown("classListsScanPage");
+    updateDropdown("classListsManagePage");
 }
 function tabhide(tj) {
     tj.style.display = "none";
@@ -66,7 +87,7 @@ function resetbody() {
 
 }
 async function checkSize() {
-   if (document.documentElement.clientWidth > 900) {
+    if (document.documentElement.clientWidth > 900) {
         document.body.style.opacity = "0%"
         document.getElementById("mySidenav").style.width = "22vw";
         document.getElementById("mySidenav").style.opacity = "1";
@@ -75,10 +96,10 @@ async function checkSize() {
     } else if (document.documentElement.clientWidth < 920) {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("mySidenav").style.opacity = "0";
-        
+
 
     }
-    
+
 }
 
 addEventListener('resize', checkSize);
@@ -93,7 +114,7 @@ onload = (event) => {
     if (!navigator.onLine) {
         document.getElementById("offlineA").style.display = "flex"
 
-    }checkSize()
+    } checkSize()
 };
 function updateOnlineStatus() {
     document.getElementById("offlineA").style.display = "none"

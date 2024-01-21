@@ -22,8 +22,9 @@ function generateQRs() {
   })
 
   setTimeout(function () {
+    let name = document.getElementById("classListName").value;
     zip.generateAsync({ type: "blob" }).then(function (blob) { // 1) generate the zip file
-      saveAs(blob, "studentList.zip");                          // 2) trigger the download
+      saveAs(blob, name+".zip");                          // 2) trigger the download
     }, function (err) {
       alert(err);
     });
