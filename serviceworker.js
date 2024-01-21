@@ -1,4 +1,5 @@
 const cachea = "HVHCache-v1";
+const version = '1.0';
 list = []
 var appshellfiles = [
     // pages can be added here for caching
