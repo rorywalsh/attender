@@ -1,24 +1,25 @@
 <html>
 
 <body>
-    <h3>Generate QR Codes</h3>
-    <hr style="width:70%">
+    <div class="a">
+    <label style="font-size:30px">Generate QRs for class</label><br>
     <md-block>
-        Add student names/ids to text field below. One student per line. When you're done, hit the generate button. This
+        Add student names/ids to text field below. One student per line. These can be copied and pasted from Moodle. When you're done, enter a class list name and hit the generate button. This
         will generate unique QR code for each student.
 
     </md-block>
-    <textarea id="students" rows="10" cols="30"></textarea>
+    <textarea id="students" rows="10" cols="30" style="width:50%"></textarea><br><br>
     <label for="fname">Class List Name:</label>
     <input type="text" id="classListName" name="fname"><br><br>
     <button onclick="generateQRs()">Generate Class List</button>
-
+</div>
     <p hidden id="studentQRImage"></p>
-
+    <div style="width:50%">
     <md-block>
         These QR codes should be emailed to your students. They will need to save them to their phone so they can be
-        scanned in class. Uploaded the downloaded zip to the app on your phone to automatically create a student list.
+        scanned in class. The generated zip can be added used in the 'Manage Class Lists' section your phone to automatically create a student list.
     </md-block>
+</div>
 </body>
 
 </html>

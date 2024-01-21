@@ -1,7 +1,7 @@
 {
-    "name": "Tabbed Web app",
+    "name": "Attender",
     "short_name": "TWA",
-    "description": "The awesome tabbed web app!",
+    "description": "QR based attendance register",
     "icons": [
         {
             "src": "favicon.png",

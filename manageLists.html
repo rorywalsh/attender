@@ -1,15 +1,19 @@
 <html>
 
 <body>
-   <md-block>
-    
-   </md-block>
-   <label>Upload a class list</label><br>
-   <input type=file id='zipUpload' onchange="uploadZip(this)"><br>
-   <!-- <button onclick="populateTable()">Click me</button> -->
-   <select name="classListsManagePage" id="classListsManagePage" onchange="showClassList()"></select>
-   <div id="studentListBlock"></p>
-  
+   <div class="a">
+      <label style="font-size:25px">Upload a class list</label><br>
+      <input type=file id='zipUpload' onchange="uploadZip(this)"><br>
+   </div>
+   <br>
+   <div class="a">
+      <label style="font-size:25px">Display class list</label><br>
+      <select name="classListsManagePage" id="classListsManagePage" onchange="showClassList()"></select>
+      <button onclick="downloadTableForClass()">Download table</button>
+   </div>
+   <div class="b" id="studentListBlock">
+   </div>
+
 </body>
 
 </html>

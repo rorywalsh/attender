@@ -15,6 +15,35 @@ async function getRoute(url) {
 
 }
 
+function removeOptions(selectElement) {
+    var i, L = selectElement.options.length - 1;
+    for(i = L; i >= 0; i--) {
+       selectElement.remove(i);
+    }
+ }
+
+function updateDropdown(id) {
+    let select = document.getElementById(id);
+    if (select) {
+        removeOptions(select);
+        let opt1 = document.createElement('option');
+        opt1.value = 'Select';
+        opt1.innerHTML = 'Select';
+        select.appendChild(opt1);
+        if (localStorage.classes) {
+            let list = JSON.parse(localStorage.classes);
+            Object.keys(list).forEach(function (key) {
+                // console.log('Key : ' + key + ', Value : ' + list[key].toString())
+                let p = document.createElement('option');
+                p.value = key;
+                p.innerHTML = key;
+                select.appendChild(p);
+            })
+        }
+    }
+}
+
+
 async function openRoute(Page, elmnt) {
     tablinks = document.getElementsByClassName("tablink");
     for (i = 0; i < tablinks.length; i++) {
@@ -31,26 +60,6 @@ async function openRoute(Page, elmnt) {
     }
     var pageContent = await getRoute(Page)
     document.getElementById("view").innerHTML = pageContent
-
-    function updateDropdown(id) {
-        let select = document.getElementById(id);
-        if (select) {
-            let opt1 = document.createElement('option');
-            opt1.value = 'Select';
-            opt1.innerHTML = 'Select';
-            select.appendChild(opt1);
-            if (localStorage.classes) {
-                let list = JSON.parse(localStorage.classes);
-                Object.keys(list).forEach(function (key) {
-                    // console.log('Key : ' + key + ', Value : ' + list[key].toString())
-                    let p = document.createElement('option');
-                    p.value = key;
-                    p.innerHTML = key;
-                    select.appendChild(p);
-                })
-            }
-        }
-    }
 
     updateDropdown("classListsScanPage");
     updateDropdown("classListsManagePage");
