@@ -24,6 +24,7 @@ function startScanning() {
         attendees.forEach(id => {
           students.forEach(s =>{
             if(s === id){
+              alert("I'm in here")
               let attendance = s.data.split(',');
               attendance[weekIndex] = 1;
             }
