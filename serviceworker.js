@@ -8,7 +8,7 @@ var appshellfiles = [
     '/counterPage.html',
     '/github.html',
     '/info.html',
-    'js/tab.min.js', '/save.min.css', '/manifest.json', 'icons/logo.png',
+    '/tab.min.js', '/save.min.css', '/manifest.json', '/logo.png',
 'fonts/MatSymbolsRounded.woff2', 'fonts/Poppins-Medium.ttf'
 
 ]
